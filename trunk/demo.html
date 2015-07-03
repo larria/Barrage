@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Barrages demo</title>
+    <style>
+        /*css init*/
+        html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img { margin:0; padding:0; }
+        fieldset, img { border:none; }
+        address, caption, cite, code, dfn, th, var { font-style:normal; font-weight:normal; }
+        ul, ol { list-style:none; }
+        input { padding-top:0; padding-bottom:0; }
+        select, input { vertical-align:middle; }
+        select, input, textarea { font-size:12px; margin:0; }
+        table { border-collapse:collapse; }
+        body { background:#fff; color:#000; font:12px/20px "微软雅黑"; -webkit-text-size-adjust:none;}
+        iframe { border:none;}
+        .clearfix:after { content:"."; display:block; height:0; visibility:hidden; clear:both; }
+        .clearfix { zoom:1; }
+        .clearit { clear:both; height:0; font-size:0; overflow:hidden; }
+        a { color:#000; text-decoration:none; }
+        a:visited { color:#800080; }
+        a:hover{ color: #B58D4F;}
+        a:hover, a:active, a:focus { text-decoration:none; }
+
+        /*for demo*/
+        h2{ margin: 10px 20px; height: 40px; line-height: 40px; font-size: 18px;}
+        #demo1{ margin-left: 20px; width: 600px; height: 400px; border: 1px solid #ccc;}
+        .demo2_input{ margin: 10px; width: 400px; height: 25px; line-height: 25px; text-indent: 10px;}
+        .demo2_submit{ margin-left: 10px; margin-top: 2px; height: 32px; line-height: 30px; width: 80px; background-color: tomato; color: #fff; text-align: center; cursor: pointer;}
+        .demo2_ckbox_lb{ padding-left: 20px; padding-top: 5px;}
+    </style>
+    <link rel="stylesheet" href="src/Barrage.css">
+    <script src="src/Barrage.js"></script>
+</head>
+<body>
+    <script>
+    // 模拟信息流
+    var msgs = (function(){
+        var me = {};
+        var simsTxt = ['努力吧！！！', 'Life是美好的...', '国足赢球了，还有啥做不到的？', 'html5的canvas也不例外', '时限为空函数', '小苹果~', '什么时候能完', '悲剧，1+1<2！', 'request比online有效很多', '专用型链接对象！', '看不懂吧，我也是，哈哈！', '确保没有别的请求正在处理', '请写一个简单的幻灯效果页面'];
+        var simPos = ['top', 'mid', 'bot', 'any'];
+        var startTime, simSendTimeout;
+        // 模拟数据结构
+        /*[
+            {
+                txt: '努力吧！！！',
+                time: 1428400773000,
+                pos: 'top'
+            },
+            {
+                txt: 'Life是美好的...',
+                time: 1428400773000,
+                pos: 'mid'
+            },
+            {
+                txt: '国足赢球了，还有啥做不到的？',
+                time: 1428400775000,
+                pos: 'mid'
+            },
+            {
+                txt: 'html5的canvas也不例外',
+                time: 1428400777000,
+                pos: 'bot'
+            }
+        ]*/
+        me.simSend = function (brg) {
+            var simPara = [];
+            // 一次最多5条
+            var simLen = Math.ceil(Math.random() * 5);
+            var nextTime = parseInt(Math.random() * 1000 + 1000, 10);
+            // 起始时间，比当前早2s是为了模拟服务器延时
+            startTime = Date.parse(new Date()) - 2000;
+            for(var i = 0; i < simLen; i ++){
+                simPara.push({
+                    txt: simsTxt[_randomIdx(simsTxt.length)],
+                    time: startTime - (Math.round(Math.random() * 5) * 1000),
+                    pos: simPos[_randomIdx(simPos.length)]
+                });
+            }
+            brg.add(simPara);
+            simSendTimeout && clearTimeout(simSendTimeout);
+            simSendTimeout = setInterval(function () {
+                me.simSend(brg);
+            }, nextTime);
+            function _randomIdx (len) {
+                return Math.floor(Math.random() * len);
+            }
+        };
+        return me;
+    })();
+    </script>
+    <h2>demo1:最简实例</h2>
+    <div id="demo1"></div>
+    <script>
+    var brg1 = new Barrage({
+        element : 'demo1'
+    });
+    // 模拟传输数据
+    msgs.simSend(brg1);
+    </script>
+    <h2>demo2:相关控制（基于demo1）</h2>
+    <input type="text" class="demo2_input" id="demo2_input" value="测试一下">
+    <br />
+    <button class="demo2_submit" id="demo2_submit">发送弹幕</button>
+    <label class="demo2_ckbox_lb" for="demo2_ckbox">切换开关</label><input name="demo2_ckbox" id="demo2_ckbox" type="checkbox" checked>
+    <script>
+    document.getElementById('demo2_submit').onclick = function () {
+        var demo2_input = document.getElementById('demo2_input');
+        if(demo2_input.value == ''){
+            demo2_input.value = '测试一下';
+        }
+        brg1.add({
+            txt : demo2_input.value
+        });
+    }
+    document.getElementById('demo2_ckbox').onchange = function  () {
+        if(this.checked){
+            brg1.restart();
+        }
+        else{
+            brg1.clear();
+        }
+    }
+    </script>
+</body>
+</html>

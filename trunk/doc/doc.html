@@ -1,0 +1,49 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link href='http://news.sina.com.cn/268/2014/1203/markfx.css' rel='stylesheet' type='text/css'><title>doc</title></head><body><article class="markdown-body"><h1 id="barragejs-"><a name="user-content-barragejs-" href="#barragejs-" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Barrage.js - 弹幕组件</h1>
+<h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>资源引用</h3>
+<pre><code class="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;src/Barrage.css&quot;&gt;
+&lt;script src=&quot;src/Barrage-min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+<h3 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>初始化参数</h3>
+<ul>
+<li>
+<p><strong>element</strong> : (String | DOM node) 初始化外层容器</p>
+</li>
+<li>
+<p>cover : (Boolean: false) 是否显示遮罩</p>
+</li>
+<li>
+<p>lines : (Number: 8) 弹幕最多显示行数</p>
+</li>
+<li>
+<p>maxList : (Number: 200) （在呈现速度不及数据增长速度的情况下）最多积压未显示的弹幕条数</p>
+</li>
+<li>
+<p>maxTxtLen : (Number: 60) 每条弹幕最长文字数</p>
+</li>
+<li>
+<p>aniSpeed : (Number: 1) 弹幕动画速度</p>
+</li>
+</ul>
+<h3 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>公有方法</h3>
+<ul>
+<li>
+<p>add : (para：Object: 弹幕信息)添加一条弹幕信息</p>
+</li>
+<li>
+<p>clear : (para：none)清空积压数据并暂停弹幕</p>
+</li>
+<li>
+<p>restart : (para：none)重新开始播放弹幕</p>
+</li>
+<li>
+<p>resize : (para：Number)动态调整弹幕主容器宽度</p>
+</li>
+</ul>
+<hr />
+<h3 id="demo"><a href="../demo.html">demo</a></h3>
+<h5 id="1"><a name="user-content-1" href="#1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>示例1：<code>最简调用</code></h5>
+<pre><code class="javascript">var barrage = new Barrage({
+    element : 'barrage'
+});
+</code></pre></article><link rel="stylesheet" href="http://news.sina.com.cn/268/2014/1210/monokai_sublime.css"><script src="http://news.sina.com.cn/268/2014/1210/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script></body></html>

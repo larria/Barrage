@@ -1,0 +1,14 @@
+.brg_wrap{ position: absolute; z-index: 990; top: 0; left: 0; width: 100%; height: 100%;}
+.brg_mask{ position: absolute; z-index: 991; top: 0; left: 0; width: 100%; height: 100%; background-color: #fff; opacity: 0.5; filter:alpha(opacity=50);}
+.brg_line{ position: absolute; width: 100%; height: 25px; overflow: hidden;}
+.brg_line0{ top: 5px; left: 0px;}
+.brg_line1{ top: 40px; left: 0px;}
+.brg_line2{ top: 75px; left: 0px;}
+.brg_line3{ top: 110px; left: 0px;}
+.brg_line4{ top: 145px; left: 0px;}
+.brg_line5{ top: 180px; left: 0px;}
+.brg_line6{ top: 215px; left: 0px;}
+.brg_line7{ top: 250px; left: 0px;}
+.brg_item{ position: absolute; right: -200px; top: 0; z-index: 992; padding: 0 10px; height: 25px; line-height: 25px; font-size: 14px; white-space: nowrap; color: #656565; background-color: rgba(77,122,255,0.3);}
+.brg_item_skin0{ background-color: rgba(57,122,255,0.3);}
+.brg_item_skin1{ background-color: rgba(122,122,255,0.3);}
